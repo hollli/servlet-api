@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Лабораторна робота №2</title>
+    <style type="text/css">
+        body{
+            font-size: 20px;
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+        input[type=text] {
+            width: 500px;
+            height: 20px;
+            border-radius: 10px;
+            border: none;
+        }
+        button{
+            border-radius: 10px;}
+        h3{
+            margin: 10px;}
+        .bg {
+            animation:slide 3s ease-in-out infinite alternate;
+            background-image: linear-gradient(-50deg, #572934 20%, greenyellow 80% );
+            bottom:0;
+            left:-50%;
+            opacity:.5;
+            position:fixed;
+            right:-50%;
+            top:0;
+            z-index:-1;
+        }
+        .bg2 {
+            animation-direction:alternate-reverse;
+            animation-duration:3s;
+        }
+        .bg3 {
+            animation-duration:2s;
+        }
+        @keyframes slide {
+            0% {
+                transform:translateX(-25%);
+            }
+            100% {
+                transform:translateX(25%);
+            }
+        }
+        #result{
+            border-radius: 10px;
+            background-color: white;
+            opacity: 0.5;
+            color: black;
+            width: max-content;
+            margin-left: auto;
+            margin-right: auto;
+            min-width: 500px;
+        }
+        #ww{
+            border-radius: 5px;
+            margin: 10px;
+        }
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function send(){
+            var qq = $("#qq").val();
+            $.post("main-servlet", {"qq": qq})
+                .done(function (data) {
+                    alert("Data Loaded: " + data);
+                    $("#result").empty().append(data);
+                });
+        }
+    </script>
+</head>
+<body>
+<div class="bg"></div>
+<div class="bg2"></div>
+<div class="bg3"></div>
+<div class="content">
+    <h3>Введіть рядок для розподілу на дві рівні частини</h3>
+    <form novalidate="">
+        <input id="qq" type="text" />
+        </br>
+        <input id="ww" type="submit" pattern="(?=.*\d)(?!.*\W+)(?=.*[a-z])(?=.*[A-Z]).{8,16}" value="Розподілити" onclick="send(); return false;">
+    </form>
+    <div id="result"></div>
+</div>
+</body>
+
